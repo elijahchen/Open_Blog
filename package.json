@@ -1,0 +1,25 @@
+{
+  "name": "openblog",
+  "version": "1.0.0",
+  "description": "A blog that is a proof of concept using RESTful methodology",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elijahchen/Open_Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elijahchen/Open_Blog/issues"
+  },
+  "homepage": "https://github.com/elijahchen/Open_Blog#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.1"
+  }
+}
