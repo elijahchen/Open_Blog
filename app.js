@@ -26,6 +26,7 @@ app.get("/", function (req, res) {
    res.redirect("blogs");
 });
 
+//INDEX ROUTE
 app.get("/blogs", function(req, res){
     Blog.find({}, function (err, blogs) {
         if(err){
@@ -36,6 +37,15 @@ app.get("/blogs", function(req, res){
     })
 });
 
+//NEW ROUTE
+app.get("/blogs/new", function (req, res) {
+    res.render("new");
+});
+
+//CREATE ROUTE
+app.get("/blogs/create", function (req, res) {
+
+});
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
 });
