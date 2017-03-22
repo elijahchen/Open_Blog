@@ -22,8 +22,18 @@ let blogSchema = new mongoose.Schema({
 let Blog = mongoose.model("Blog", blogSchema);
 
 // RESTFUL ROUTING
+app.get("/", function (req, res) {
+   res.redirect("blogs");
+});
+
 app.get("/blogs", function(req, res){
-    res.render("index");
+    Blog.find({}, function (err, blogs) {
+        if(err){
+            console.log("ERROR!");
+        } else {
+            res.render("index", {blogs: blogs});
+        }
+    })
 });
 
 app.listen(3000, process.env.IP, function () {
