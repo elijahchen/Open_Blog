@@ -1,4 +1,4 @@
-let express     = require("express"),
+const express     = require("express"),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
     app         = express();
@@ -22,6 +22,9 @@ let blogSchema = new mongoose.Schema({
 let Blog = mongoose.model("Blog", blogSchema);
 
 // RESTFUL ROUTING
+app.get("/blogs", function(req, res){
+    res.render("index");
+});
 
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
