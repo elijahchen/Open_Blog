@@ -44,7 +44,15 @@ app.get("/blogs/new", function (req, res) {
 
 //CREATE ROUTE
 app.get("/blogs/create", function (req, res) {
-
+    //Create blog
+    Blog.create(req.body, function (err, newBlog) {
+        if(err){
+            res.render("new");
+        } else {
+            //Redirect
+            res.redirect("/blogs");
+        }
+    });
 });
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");

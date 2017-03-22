@@ -2,6 +2,12 @@
 
 <div class="ui main text container">
     <div class="ui huge header">New Blog</div>
+    <form action="/blogs" method="post">
+        <input type="text" name="blog[title]" placeholder="Title">
+        <input type="text" name="blog[image]" placeholder="Image URL">
+        <input type="text" name="blog[body]" placeholder="Write your blog post here">
+        <button type="submit"></button>
+    </form>
 </div>
 
 <% include ./partials/footer%>
