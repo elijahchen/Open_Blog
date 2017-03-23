@@ -57,8 +57,15 @@ app.get("/blogs/create", function (req, res) {
 
 // SHOW ROUTE
 app.get("/blogs/:id", function (req, res) {
-    res.send("SHOW PAGE");
+    Blog.findById(req.params.id, function (err, foundBlog) {
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.render("show", {blog: foundBlog});
+        }
+    });
 });
+
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
 });
