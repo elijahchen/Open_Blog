@@ -54,6 +54,11 @@ app.get("/blogs/create", function (req, res) {
         }
     });
 });
+
+// SHOW ROUTE
+app.get("/blogs/:id", function (req, res) {
+    res.send("SHOW PAGE");
+});
 app.listen(3000, process.env.IP, function () {
     console.log("SERVER STARTED");
 });
