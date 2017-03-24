@@ -2,13 +2,13 @@
 
 <h1>INDEX PAGE</h1>
 
-<%= blogs.forEach(function(blog){%>
+<% blogs.forEach(function(blog){%>
     <div>
         <h2><%= blog.title %></h2>
         <img src="<%= blog.image %>">
         <span><%= blog.created %></span>
         <p><%= blog.body %></p>
-        <a href="/blogs"<%= blog.id %>>Read More</a>
+        <a href="/blogs<%= blog._id %>">Read More</a>
     </div>
 <% }); %>
 
