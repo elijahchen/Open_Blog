@@ -1,4 +1,4 @@
-const express     = require("express"),
+let express     = require("express"),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
     app         = express();
@@ -45,7 +45,7 @@ app.get("/blogs/new", function (req, res) {
 //CREATE ROUTE
 app.get("/blogs/create", function (req, res) {
     //Create blog
-    Blog.create(req.body, function (err, newBlog) {
+    Blog.create(req.body.blog, function (err, newBlog) {
         if(err){
             res.render("new");
         } else {
