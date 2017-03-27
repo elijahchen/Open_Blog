@@ -1,11 +1,13 @@
 let express     = require("express"),
     bodyParser  = require("body-parser"),
+    methodOverride = require("method-override");
     mongoose    = require("mongoose"),
     app         = express();
 
 // MONGOOSE MODEL CONFIGURATION
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -73,6 +75,17 @@ app.get("/blogs/:id/edit", function (req, res) {
             res.redirect("/");
         } else {
             res.render("edit", {blog: foundBlog});
+        }
+    });
+});
+
+// UPDATE ROUTE
+app.put("/blogs/:id", function (req, res) {
+    Blog.findByIdAndUpdate(req.params.id , req.body.blog, function (err, updatedBlog) {
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.redirect("/blogs/" + req.params.id);
         }
     });
 });
