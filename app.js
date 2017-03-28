@@ -7,7 +7,7 @@ let express     = require("express"),
 // MONGOOSE MODEL CONFIGURATION
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(methodOverride("?_method"));
+app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -36,7 +36,7 @@ app.get("/blogs", function(req, res){
         } else {
             res.render("index", {blogs: blogs});
         }
-    })
+    });
 });
 
 //NEW ROUTE
@@ -45,13 +45,12 @@ app.get("/blogs/new", function (req, res) {
 });
 
 //CREATE ROUTE
-app.post("/blogs/create", function (req, res) {
-    //Create blog
-    Blog.create(req.body.blog, function (err, newBlog) {
+app.post("/blogs", function(req, res){
+    Blog.create(req.body.blog, function(err, newBlog){
+        console.log(newBlog);
         if(err){
             res.render("new");
         } else {
-            //Redirect
             res.redirect("/blogs");
         }
     });
@@ -92,11 +91,11 @@ app.put("/blogs/:id", function (req, res) {
 
 // DELETE ROUTE
 app.delete("/blogs/:id", function(req, res){
-    Blog.findByIdAndRemove(req.params.id, function(err){
+    Blog.findByIdAndRemove(req.params.id, function(err, blog){
         if(err){
-            console.log("ERROR");
+            console.log(err);
         } else {
-            console.log("SUCCESS");
+            res.redirect("/blogs");
         }
     });
 });
