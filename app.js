@@ -1,13 +1,13 @@
 let express     = require("express"),
     bodyParser  = require("body-parser"),
-    methodOverride = require("method-override");
+    methodOverride = require("method-override"),
     mongoose    = require("mongoose"),
     app         = express();
 
 // MONGOOSE MODEL CONFIGURATION
 mongoose.connect("mongodb://user:testapp@ds129050.mlab.com:29050/ecdata");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(methodOverride("_method"));
+app.use(methodOverride("?_method"));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -45,7 +45,7 @@ app.get("/blogs/new", function (req, res) {
 });
 
 //CREATE ROUTE
-app.get("/blogs/create", function (req, res) {
+app.post("/blogs/create", function (req, res) {
     //Create blog
     Blog.create(req.body.blog, function (err, newBlog) {
         if(err){
@@ -83,9 +83,20 @@ app.get("/blogs/:id/edit", function (req, res) {
 app.put("/blogs/:id", function (req, res) {
     Blog.findByIdAndUpdate(req.params.id , req.body.blog, function (err, updatedBlog) {
         if(err){
-            res.redirect("/blogs");
+            res.redirect("/");
         } else {
             res.redirect("/blogs/" + req.params.id);
+        }
+    });
+});
+
+// DELETE ROUTE
+app.delete("/blogs/:id", function(req, res){
+    Blog.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            console.log("ERROR");
+        } else {
+            console.log("SUCCESS");
         }
     });
 });
